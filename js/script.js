@@ -19,7 +19,7 @@ const calculateBMI = (weight, height) => {
 const validateInput = (weight, height, age, gender) => {
     console.log("DEBUG: Validating inputs", { weight, height, age, gender }); // Debugging
 
-    const genderErrorMessage = document.getElementById('genderErrorMessage');
+    const genderErrorMessage = document.getElementById('gender-error-message');
     const weightErrorMessage = document.getElementById('weight-error-message');
     const ageErrorMessage = document.getElementById('age-error-message');
     const heightErrorMessage = document.getElementById('height-error-message');
