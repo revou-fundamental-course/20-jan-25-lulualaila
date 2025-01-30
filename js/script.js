@@ -78,6 +78,45 @@ const checkStatus = (bmi, gender) => {
     return status || "Tidak Valid";
 };
 
+// Fungsi untuk mendapatkan deskripsi teks berdasarkan status BMI
+const getDescText = (status) => {
+    if (status === BMI_CATEGORIES.UNDERWEIGHT) {
+        return 'Anda memiliki berat badan kurang dari normal.';
+    } else if (status === BMI_CATEGORIES.NORMAL) {
+        return 'Anda memiliki berat badan dalam kisaran normal.';
+    } else if (status === BMI_CATEGORIES.OVERWEIGHT) {
+        return 'Anda memiliki berat badan berlebih.';
+    } else if (status === BMI_CATEGORIES.OBESITY) {
+        return 'Anda memiliki berat badan yang sangat berlebih.';
+    }
+};
+
+// Fungsi untuk mendapatkan teks saran berdasarkan status BMI
+const getSuggestionText = (status) => {
+    if (status === BMI_CATEGORIES.UNDERWEIGHT) {
+        return 'Jika BMI Anda berada dalam kategori ini maka Anda dianjurkan untuk menambah berat badan hingga batas normal.';
+    } else if (status === BMI_CATEGORIES.NORMAL) {
+        return 'Jika BMI Anda berada dalam kategori ini maka Anda memiliki berat badan yang normal dan sehat.';
+    } else if (status === BMI_CATEGORIES.OVERWEIGHT) {
+        return 'Jika BMI Anda berada dalam kategori ini maka Anda dianjurkan untuk menurunkan berat badan hingga batas normal.';
+    } else if (status === BMI_CATEGORIES.OBESITY) {
+        return 'Jika BMI Anda berada dalam kategori ini maka Anda dianjurkan untuk mengurangi berat badan hingga batas normal.';
+    }
+};
+
+// Fungsi untuk mendapatkan teks saran gizi berdasarkan status BMI
+const getAdviceText = (status) => {
+    if (status === BMI_CATEGORIES.UNDERWEIGHT) {
+        return 'Tingkatkan asupan nutrisi dengan makanan bergizi dan berkonsultasilah dengan dokter untuk mencapai berat badan ideal.';
+    } else if ( status === BMI_CATEGORIES.NORMAL) {
+        return 'Pertahankan pola hidup sehat dengan menjaga pola makan seimbang dan rutin berolahraga.';
+    } else if (status === BMI_CATEGORIES.OVERWEIGHT) {
+        return 'Kurangi asupan kalori dan tingkatkan aktivitas fisik untuk membantu menurunkan berat badan.';
+    } else if (status === BMI_CATEGORIES.OBESITY) {
+        return 'Konsultasikan dengan tenaga medis untuk program penurunan berat badan yang aman dan efektif.';
+    }
+};
+
 // Fungsi untuk mendapatkan penyakit berdasarkan status BMI
 const getDiseases = (status) => {
     if (status === BMI_CATEGORIES.UNDERWEIGHT) {
