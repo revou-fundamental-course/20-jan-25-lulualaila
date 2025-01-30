@@ -8,15 +8,15 @@ const BMI_CATEGORIES = {
     OBESITY: 'Kegemukan (Obesitas)',
 };
 
-// Fungsi untuk menghitung BMI berdasarkan berat badan dan tinggi badan
+// Fungsi untuk menghitung BMI
 const calculateBMI = (weight, height) => {
     let bmi = weight / ((height / 100) ** 2);
     return bmi.toFixed(1);
 };
 
-// Fungsi untuk memvalidasi input berat badan, tinggi badan, usia, dan jenis kelamin
+// Fungsi untuk memvalidasi input
 const validateInput = (weight, height, age, gender) => {
-    console.log("DEBUG: Validating inputs", { weight, height, age, gender }); // Debugging
+    console.log("DEBUG: Validating inputs", { weight, height, age, gender });
 
     const genderErrorMessage = document.getElementById('gender-error-message');
     const weightErrorMessage = document.getElementById('weight-error-message');
@@ -57,11 +57,10 @@ const validateInput = (weight, height, age, gender) => {
     return isValid;
 };
 
-
-// Fungsi untuk mengecek status BMI berdasarkan nilai BMI dan jenis kelamin
+// Fungsi untuk mengecek status BMI
 const checkStatus = (bmi, gender) => {
     let status = "";
-    gender = gender.toLowerCase(); // Pastikan selalu lowercase
+    gender = gender.toLowerCase();
 
     if (gender === "pria") {
         if (bmi < 18.5) status = BMI_CATEGORIES.UNDERWEIGHT;
@@ -76,49 +75,10 @@ const checkStatus = (bmi, gender) => {
     }
 
     console.log("Jenis Kelamin:", gender, "| Status BMI:", status);
-    return status;
+    return status || "Tidak Valid";
 };
 
-// Fungsi untuk mendapatkan deskripsi teks berdasarkan status BMI
-const getDescText = (status) => {
-    if (status === BMI_CATEGORIES.UNDERWEIGHT) {
-        return 'Anda memiliki berat badan kurang dari normal.';
-    } else if (status === BMI_CATEGORIES.NORMAL) {
-        return 'Anda memiliki berat badan dalam kisaran normal.';
-    } else if (status === BMI_CATEGORIES.OVERWEIGHT) {
-        return 'Anda memiliki berat badan berlebih.';
-    } else if (status === BMI_CATEGORIES.OBESITY) {
-        return 'Anda memiliki berat badan yang sangat berlebih.';
-    }
-};
-
-// Fungsi untuk mendapatkan teks saran berdasarkan status BMI
-const getSuggestionText = (status) => {
-    if (status === BMI_CATEGORIES.UNDERWEIGHT) {
-        return 'Jika BMI Anda berada dalam kategori ini maka Anda dianjurkan untuk menambah berat badan hingga batas normal.';
-    } else if (status === BMI_CATEGORIES.NORMAL) {
-        return 'Jika BMI Anda berada dalam kategori ini maka Anda memiliki berat badan yang normal dan sehat.';
-    } else if (status === BMI_CATEGORIES.OVERWEIGHT) {
-        return 'Jika BMI Anda berada dalam kategori ini maka Anda dianjurkan untuk menurunkan berat badan hingga batas normal.';
-    } else if (status === BMI_CATEGORIES.OBESITY) {
-        return 'Jika BMI Anda berada dalam kategori ini maka Anda dianjurkan untuk mengurangi berat badan hingga batas normal.';
-    }
-};
-
-// Fungsi untuk mendapatkan teks saran gizi berdasarkan status BMI
-const getAdviceText = (status) => {
-    if (status === BMI_CATEGORIES.UNDERWEIGHT) {
-        return 'Tingkatkan asupan nutrisi dengan makanan bergizi dan berkonsultasilah dengan dokter untuk mencapai berat badan ideal.';
-    } else if (status === BMI_CATEGORIES.NORMAL) {
-        return 'Pertahankan pola hidup sehat dengan menjaga pola makan seimbang dan rutin berolahraga.';
-    } else if (status === BMI_CATEGORIES.OVERWEIGHT) {
-        return 'Kurangi asupan kalori dan tingkatkan aktivitas fisik untuk membantu menurunkan berat badan.';
-    } else if (status === BMI_CATEGORIES.OBESITY) {
-        return 'Konsultasikan dengan tenaga medis untuk program penurunan berat badan yang aman dan efektif.';
-    }
-};
-
-// Fungsi untuk mendapatkan daftar penyakit berdasarkan status BMI
+// Fungsi untuk mendapatkan penyakit berdasarkan status BMI
 const getDiseases = (status) => {
     if (status === BMI_CATEGORIES.UNDERWEIGHT) {
         return ['Kekurangan gizi', 'Gangguan pertumbuhan', 'Sistem kekebalan tubuh lemah', 'Gangguan kesuburan'];
@@ -128,37 +88,43 @@ const getDiseases = (status) => {
         return ['Diabetes Tipe 2', 'Serangan Jantung', 'Hipertensi', 'Gastroesophageal Reflux Disease', 'Osteoarthritis', 'Kanker', 'Kolesterol Tinggi'];
     } else if (status === BMI_CATEGORIES.OBESITY) {
         return ['Penyakit Jantung', 'Stroke', 'Kanker', 'Masalah Pencernaan', 'Sleep Apnea', 'Osteoartritis'];
+    } else {
+        return []; // Default jika status tidak valid
     }
 };
 
-// Fungsi untuk menampilkan hasil BMI, status, saran, dan risiko penyakit
+// Fungsi untuk menampilkan hasil BMI
 const generateDisplay = (bmi, status) => {
     const resultTitle = document.getElementById('result-title');
     const resultBmi = document.getElementById('result-bmi');
     const resultDesc = document.getElementById('result-desc');
+    const resultText = document.getElementById('result-text');
     const suggestionText = document.getElementById('suggestion-text');
     const adviceText = document.getElementById('advice-text');
     const riskTitle = document.getElementById('risk-title');
     const riskList = document.getElementById('list-risk');
 
-    if (resultTitle) resultTitle.innerText = status;
-    if (resultBmi) resultBmi.innerText = bmi;
-    if (resultDesc) resultDesc.innerText = getDescText(status);
-    if (suggestionText) suggestionText.innerText = getSuggestionText(status);
-    if (adviceText) adviceText.innerText = getAdviceText(status);
-    if (riskTitle) riskTitle.innerText = `Beberapa resiko penyakit yang berasal dari tubuh ${status}`;
     if (riskList) {
         riskList.innerHTML = '';
         const diseases = getDiseases(status);
+
         diseases.forEach((disease) => {
             const listItem = document.createElement('li');
             listItem.innerText = disease;
             riskList.appendChild(listItem);
         });
     }
+
+    resultTitle.innerText = status;
+    resultBmi.innerText = bmi;
+    resultDesc.innerText = getDescText(status);
+    resultText.innerText = `Hasil BMI: ${bmi}`;
+    suggestionText.innerText = getSuggestionText(status);
+    adviceText.innerText = getAdviceText(status);
+    riskTitle.innerText = `Beberapa risiko penyakit yang berasal dari tubuh ${status}`;
 };
 
-// Fungsi untuk mengecek BMI dan menampilkan hasil
+// Fungsi untuk menghitung dan menampilkan BMI
 const checkBMI = () => {
     const weight = +document.getElementById('weight').value;
     const height = +document.getElementById('height').value;
@@ -166,26 +132,17 @@ const checkBMI = () => {
     const genderInput = document.querySelector('input[name="gender"]:checked');
     const gender = genderInput ? genderInput.value.toLowerCase() : "";
 
-    const genderErrorMessage = document.getElementById('gender-error-message');
-
-    if (genderErrorMessage) {
-        genderErrorMessage.innerText = "";
-    }
-    if (!gender) {
-        if (genderErrorMessage) {
-            genderErrorMessage.innerText = "Pilih jenis kelamin terlebih dahulu!";
-        }
-        return;
-    }
+    console.log("DEBUG: Inputs", { weight, height, age, gender });
 
     if (!validateInput(weight, height, age, gender)) {
-        console.warn("Validasi gagal.");
-        return; 
+        console.warn("Validasi gagal. Tidak melanjutkan.");
+        return;
     }
 
     const bmi = calculateBMI(weight, height);
     const status = checkStatus(bmi, gender);
-    console.log("BMI:", bmi, "| Status BMI:", status);
 
+    console.log("DEBUG: BMI & Status", { bmi, status });
     generateDisplay(bmi, status);
 };
+
