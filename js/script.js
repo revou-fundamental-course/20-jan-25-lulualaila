@@ -1,4 +1,4 @@
-// <!-- ini file javascript // Lu'lu'a Lim'a Laila // 2025 -->
+// <!-- file javascript // Lu'lu'a Lim'a Laila // 2025 -->
 
 // Objek untuk menyimpan kategori BMI dan pesan terkaitnya
 const BMI_CATEGORIES = {
