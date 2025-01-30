@@ -16,9 +16,8 @@ const calculateBMI = (weight, height) => {
 
 // Fungsi untuk memvalidasi input berat badan, tinggi badan, usia, dan jenis kelamin
 const validateInput = (weight, height, age, gender) => {
-    console.log("DEBUG: Validating inputs", { weight, height, age, gender });
+    console.log("DEBUG: Validating inputs", { weight, height, age, gender }); // Debugging
 
-    // Mendapatkan elemen error
     const genderErrorMessage = document.getElementById('gender-error-message');
     const weightErrorMessage = document.getElementById('weight-error-message');
     const ageErrorMessage = document.getElementById('age-error-message');
@@ -30,33 +29,34 @@ const validateInput = (weight, height, age, gender) => {
 
     let isValid = true;
 
+    // Validasi gender
+    if (!gender) {
+        genderErrorMessage.innerText = 'Pilih jenis kelamin terlebih dahulu!';
+        isValid = false;
+    }
+
     // Validasi berat badan
     if (isNaN(weight) || weight <= 0) {
-        if (weightErrorMessage) {
-            weightErrorMessage.innerText = 'Berat badan harus berupa angka lebih dari 0';
-        }
+        weightErrorMessage.innerText = 'Berat badan harus berupa angka lebih dari 0';
         isValid = false;
     }
 
     // Validasi tinggi badan
     if (isNaN(height) || height <= 0) {
-        if (heightErrorMessage) {
-            heightErrorMessage.innerText = 'Tinggi badan harus berupa angka lebih dari 0';
-        }
+        heightErrorMessage.innerText = 'Tinggi badan harus berupa angka lebih dari 0';
         isValid = false;
     }
 
     // Validasi usia
     if (isNaN(age) || age <= 0) {
-        if (ageErrorMessage) {
-            ageErrorMessage.innerText = 'Umur harus berupa angka lebih dari 0';
-        }
+        ageErrorMessage.innerText = 'Umur harus berupa angka lebih dari 0';
         isValid = false;
     }
 
     console.log("DEBUG: Validation result", { isValid });
     return isValid;
 };
+
 
 // Fungsi untuk mengecek status BMI berdasarkan nilai BMI dan jenis kelamin
 const checkStatus = (bmi, gender) => {
@@ -166,12 +166,26 @@ const checkBMI = () => {
     const genderInput = document.querySelector('input[name="gender"]:checked');
     const gender = genderInput ? genderInput.value.toLowerCase() : "";
 
+    const genderErrorMessage = document.getElementById('gender-error-message');
+
+    if (genderErrorMessage) {
+        genderErrorMessage.innerText = "";
+    }
+    if (!gender) {
+        if (genderErrorMessage) {
+            genderErrorMessage.innerText = "Pilih jenis kelamin terlebih dahulu!";
+        }
+        return;
+    }
+
     if (!validateInput(weight, height, age, gender)) {
         console.warn("Validasi gagal.");
-        return;
+        return; 
     }
 
     const bmi = calculateBMI(weight, height);
     const status = checkStatus(bmi, gender);
+    console.log("BMI:", bmi, "| Status BMI:", status);
+
     generateDisplay(bmi, status);
 };
