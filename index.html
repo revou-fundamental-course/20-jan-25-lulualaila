@@ -1,0 +1,113 @@
+<!-- ini file html // Lu'lu'a Lim'a Laila // 2025 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator BMI</title>
+    <!-- Css code -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Javascript code -->
+    <script src="js/script.js" defer></script>
+</head>
+
+<!-- Header Website -->
+<body>
+    <header class="main-header">
+        <img src="assets/logo.png" alt="logo BMI">
+    </header>
+
+    <main>
+        <!-- Left Content -->
+        <section class="main-section">
+            <!-- Introduction -->
+            <article>
+                <h1>Apa Itu Kalkulator BMI</h1>
+                <p>BMI (Body Mass Index) adalah metode cepat untuk mengevaluasi kesehatan tubuh Anda berdasarkan berat dan tinggi badan. Dengan kalkulator BMI ini, Anda bisa mengetahui apakah berat badan Anda tergolong normal, kurang, atau berlebih. Ingin tahu apakah berat badan Anda ideal? Mulai hitung sekarang dan ambil langkah pertama menuju hidup sehat!</p>
+            </article> 
+
+            <!-- Form -->
+            <form>
+                <!-- Gender Selection -->
+                <div class="gender-selection">
+                    <div>
+                        <label for="wanita">♀</label>
+                        <input type="radio" id="wanita" name="gender" value="wanita">
+                    </div>
+                    <div>
+                        <label for="pria">♂</label>
+                        <input type="radio" id="pria" name="gender" value="pria">
+                    </div>
+                </div>
+                <span id="gender-error-message" class="error-message"></span>
+                <!-- Form -->
+                <div class="form-group">
+                    <!-- Weight -->
+                    <div class="form-field">
+                        <label for="weight">Berat Badan (kg)</label>
+                        <input type="number" id="weight">
+                    </div>
+                    <span id="weight-error-message" class="error-message"></span>
+                    <!-- Age -->
+                    <div class="form-field">
+                        <label for="age">Usia (tahun)</label>
+                        <input type="number" id="age">
+                    </div>
+                    <span id="ageErrorMessage" class="error-message"></span>
+                    <!-- Height -->
+                    <div class="form-field">
+                        <label for="height">Tinggi Badan (cm)</label>
+                        <input type="number" id="height">
+                    </div>
+                    <span id="height-error-message" class="error-message"></span>
+                </div>
+                <!-- Button -->
+                <div>
+                    <button type="button" onclick="checkBMI()">Hitung BMI Anda!</button>
+                </div>
+            </form>
+
+            <!-- Feature Information -->
+            <article>
+                <h1>Keunggulan Fitur</h1>
+                <ol>
+                    <li>Menghitung berat badan</li>
+                    <li>Menentukan kategori berat badan ideal atau tidak</li>
+                    <li>Mempersiapkan program penurunan berat badan</li>
+                </ol>
+                <p>Kalkulator ini hanya boleh digunakan oleh orang dewasa (wanita hamil atau menyusui tidak boleh mengandalan pembacaan BMI ini) dan tidak ada tindakan yang harus diambil berdasarkan nilainya selain berkonsultasi dengan orang yang memnuhi syarat seperti dokter</p>
+                <p>Kalkulator akan memberi Anda gambaran tentang perbandingan berat badan Anda dengan nilai umum. Indeks Massa Tubuh (atau BMI) dihitung sebagai berat badan Anda (dalam kilogram) dibagi dengan kuadrat tinggi badan Anda (dalam meter) atau BMI = Kg/M²</p>
+            </article>
+        </section>
+
+        <!-- Right Content -->
+        <section class="main-section">
+            <section class="result-section">
+            <h1>Hasil Perhitungan</h1>
+            <!-- Result -->
+            <div class="sub-result">
+                <h3 id="result-title" class="result-title"></h3>
+                <div id="result-bmi" class="result-bmi"></div>
+                <p id="result-desc" class="result-desc"></p>
+            </div>
+            <!-- Paragraph Result -->
+            <div class="paragraph-result">
+                <p id="result-text"></p>
+                <p id="suggestion-text"></p>
+                <p id="advice-text"></p>
+            </div>
+            <!-- Risk -->
+            <div class="risk-result">
+                <h6 id="risk-title"></h6>
+                <ul id="list-risk" class="list-risk"></ul>
+            </div>
+            </section>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <footer>
+        <span>©Lulua Laila 2025</span>
+    </footer>
+</body>
+</html>
