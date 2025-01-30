@@ -4,6 +4,7 @@
 
 ## Cara Kerja Kalkulator BMI
 Kalkulator BMI menggunakan rumus berikut:
+
 ![Rumus BMI](assets/rumusbmi.jpeg)
 
 ## Kategori BMI
