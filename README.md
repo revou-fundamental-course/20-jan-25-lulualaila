@@ -12,6 +12,7 @@ Hasil BMI dikelompokkan dalam beberapa kategori, seperti:
 - Normal (Ideal): BMI 18,5 - 24,9
 - Berat badan berlebih (Overweight): BMI 25 - 29,9
 - Obesitas: BMI ≥ 30
+
 Kategori ini bisa sedikit berbeda berdasarkan jenis kelamin, usia, atau standar negara tertentu.
 
 ## Manfaat Kalkulator BMI
